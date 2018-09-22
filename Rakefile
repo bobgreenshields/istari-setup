@@ -8,7 +8,8 @@ Dir.glob('tasks/*.rake').each { |r| import r}
 include ShellCmd
 include Utils
 
-DUNGEONS_ROOT = Pathname.new('/home/bobg/dev/istari')
+DUNGEONS_ROOT = Pathname.pwd
+#DUNGEONS_ROOT = Pathname.new('/home/istari/dungeons')
 
 ZIP_URL = 'https://github.com/bobgreenshields/deliverance/archive/master.zip'
 GIT_URL = 'https://github.com/bobgreenshields/deliverance.git'
@@ -23,7 +24,9 @@ task :new do
 	end
 
 	dungeon_name = sanitise(name)
-	dungeon_dir = Pathname.pwd + dungeon_name
+#	dungeon_dir = Pathname.pwd + dungeon_name
+	dungeon_dir = DUNGEONS_ROOT + dungeon_name
+	puts "Looking for #{dungeon_dir}"
 	if dungeon_dir.exist?
 		puts "FAILED: the folder #{dungeon_dir} already exists"
 		exit
@@ -38,7 +41,8 @@ task :new do
 	end
 	puts "#{dungeon_name} created"
 	puts "type...   cd #{dungeon_name}"
-
+  puts "then type... rake -T"
+  puts "for commands to generate the new site"
 end
 
 
