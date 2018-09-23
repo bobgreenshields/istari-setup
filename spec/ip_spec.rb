@@ -26,31 +26,31 @@ EOF
 describe Ip do
 	describe "#call" do
 		context 'with a valid shell response' do
-			let(:resp) { Response.new(cmd: "ls /sys/class/net",
+			let(:resp) { Response.new(cmd: "ip addr show",
 				stdout: ip_addr_show , stderr: "", status: StatusDbl.new(0)) }
 
 			it 'returns an array' do
 				cmd = double("shell command")
-				expect(cmd).to receive(:call).with("ls /sys/class/net").and_return(resp)
+				expect(cmd).to receive(:call).with("ip addr show").and_return(resp)
 				ip = Ip.new(shell: cmd)
 				expect(ip.call).to be_kind_of(Array)
 			end
 
-			it 'returns an array of the ips' do
+			it 'returns an array of the intf_ips' do
 				cmd = double("shell command")
-				expect(cmd).to receive(:call).with("ls /sys/class/net").and_return(resp)
+				expect(cmd).to receive(:call).with("ip addr show").and_return(resp)
 				ip = Ip.new(shell: cmd)
 				expect(ip.call).to eql(["172.16.77.134"])
 			end
 		end	
 
 		context 'with a failed shell response' do
-			let(:resp) { Response.new(cmd: "ls /sys/class/net",
+			let(:resp) { Response.new(cmd: "ip addr show",
 				stdout: "" , stderr: "Command failed", status: StatusDbl.new(1)) }
 
 			it 'raises a StandardError' do
 				cmd = double("shell command")
-				expect(cmd).to receive(:call).with("ls /sys/class/net").and_return(resp)
+				expect(cmd).to receive(:call).with("ip addr show").and_return(resp)
 				ip = Ip.new(shell: cmd)
 				expect { ip.call }.to raise_error(StandardError)
 			end
@@ -60,31 +60,31 @@ describe Ip do
 
 	describe "interfaces" do
 		context 'with a valid shell response' do
-			let(:resp) { Response.new(cmd: "ls /sys/class/net",
+			let(:resp) { Response.new(cmd: "ip addr show",
 				stdout: ip_addr_show , stderr: "", status: StatusDbl.new(0)) }
 
 			it 'returns an array' do
 				cmd = double("shell command")
-				expect(cmd).to receive(:call).with("ls /sys/class/net").and_return(resp)
+				expect(cmd).to receive(:call).with("ip addr show").and_return(resp)
 				ip = Ip.new(shell: cmd)
 				expect(ip.interfaces).to be_kind_of(Array)
 			end
 
 			it 'returns an array of the interfaces' do
 				cmd = double("shell command")
-				expect(cmd).to receive(:call).with("ls /sys/class/net").and_return(resp)
+				expect(cmd).to receive(:call).with("ip addr show").and_return(resp)
 				ip = Ip.new(shell: cmd)
 				expect(ip.interfaces).to eql([{ name: "enp0s31f6", ip: "172.16.77.134"}])
 			end
 		end	
 
 		context 'with a failed shell response' do
-			let(:resp) { Response.new(cmd: "ls /sys/class/net",
+			let(:resp) { Response.new(cmd: "ip addr show",
 				stdout: "" , stderr: "Command failed", status: StatusDbl.new(1)) }
 
 			it 'raises a StandardError' do
 				cmd = double("shell command")
-				expect(cmd).to receive(:call).with("ls /sys/class/net").and_return(resp)
+				expect(cmd).to receive(:call).with("ip addr show").and_return(resp)
 				ip = Ip.new(shell: cmd)
 				expect { ip.interfaces }.to raise_error(StandardError)
 			end
