@@ -49,3 +49,8 @@ desc "Check the current working directory"
 task :pwd do
 	puts Dir.pwd
 end
+
+desc "Check the dir that all new dungeons will be created in"
+task :root do
+	puts "New dungeons will be created in #{DUNGEONS_ROOT}"	
+end
