@@ -39,14 +39,15 @@ task :new do
 		shell.call('git pull origin master').failed? { |r| notify_exit(r) }
 	end
 	puts "#{dungeon_name} created"
-	puts "type...   cd #{dungeon_name}"
+	puts "type...   cd ~/dungeons/#{dungeon_name}"
   puts "then type... rake -T"
   puts "for commands to generate the new site"
 end
 
 desc "Check the current working directory"
 task :pwd do
-	puts Dir.pwd
+	puts Rake.original_dir
+	#puts Dir.pwd
 end
 
 desc "Check the dir that all new dungeons will be created in"
