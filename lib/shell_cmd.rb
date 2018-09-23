@@ -2,7 +2,7 @@ require "open3"
 
 module ShellCmd
 	class Response
-		attr_reader :cmd, :stdout, :exit_code
+		attr_reader :cmd, :stdout, :stderr, :exit_code
 
 		def initialize(cmd:, stdout:, stderr:, status:)
 			@cmd = desplat(cmd)
