@@ -8,7 +8,7 @@ Dir.glob('tasks/*.rake').each { |r| import r}
 include ShellCmd
 include Utils
 
-DUNGEONS_ROOT = Pathname.pwd
+DUNGEONS_ROOT = Pathname.pwd + "dungeons"
 #DUNGEONS_ROOT = Pathname.new('/home/istari/dungeons')
 
 ZIP_URL = 'https://github.com/bobgreenshields/deliverance/archive/master.zip'
@@ -24,7 +24,6 @@ task :new do
 	end
 
 	dungeon_name = sanitise(name)
-#	dungeon_dir = Pathname.pwd + dungeon_name
 	dungeon_dir = DUNGEONS_ROOT + dungeon_name
 	puts "Looking for #{dungeon_dir}"
 	if dungeon_dir.exist?
