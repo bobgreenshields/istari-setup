@@ -44,12 +44,12 @@ task :setup do
 		exit
 	end
 	shell = Shell.new
-	if shell.call("mountpoint #{DUNGEONS_ROOT}").success?
+	if shell.call("mountpoint #{DUNGEONS_ROOT}").succeeded?
 		puts "Folder dungeons is already mounted on #{DUNGEONS_ROOT}"
 	else
 		resp = shell.call(MNT_CMD)
 		resp.failed? { |r| notify_exit(r) }
-		if shell.call("mountpoint #{DUNGEONS_ROOT}").success?
+		if shell.call("mountpoint #{DUNGEONS_ROOT}").succeeded?
 			puts "Folder dungeons has been successfully mounted on #{DUNGEONS_ROOT}"
 		else
 			puts "FAILED: the folder dungeons could not be mounted on #{DUNGEONS_ROOT}"
