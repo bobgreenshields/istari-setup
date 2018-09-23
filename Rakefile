@@ -45,9 +45,6 @@ task :new do
   puts "for commands to generate the new site"
 end
 
-
-
-
 desc "Check the current working directory"
 task :pwd do
 	puts Dir.pwd
