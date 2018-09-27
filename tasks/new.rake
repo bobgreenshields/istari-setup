@@ -36,6 +36,7 @@ task :new do
 		shell.call('git remote add origin https://github.com/bobgreenshields/deliverance.git').failed? { |r| notify_exit(r) }
 		shell.call('git pull origin master').failed? { |r| notify_exit(r) }
 		shell.call('git branch -u origin/master').failed? { |r| notify_exit(r) }
+		shell.call('bundle install').failed? { |r| notify_exit(r) }
 	end
 	puts "#{dungeon_name} created"
 	if Rake.original_dir.to_s == DUNGEONS_ROOT.parent.to_s
